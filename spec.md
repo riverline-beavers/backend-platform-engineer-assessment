@@ -181,12 +181,18 @@ These rules govern how the platform handles borrower data. They are abstracted f
 | Constraint | Value | Rationale |
 |------------|-------|-----------|
 | **Single command startup** | `docker compose up` must bring up your ENTIRE system — databases, queues, API, everything. No manual steps. | If we can't run it, we can't evaluate it. |
+| **All infrastructure local** | No Firebase, Supabase, managed databases, cloud services, or anything requiring internet/API keys. Everything runs in Docker. | We evaluate your engineering, not your ability to configure a managed service. |
+| **No auth/RBAC frameworks** | No casbin, accesscontrol, casl, passport strategies, Auth0, Clerk, Firebase Auth. Build your own. Crypto primitives (jsonwebtoken, bcrypt, crypto) are fine. | The auth and RBAC system IS what we're evaluating. Using a pre-built one skips the test. |
+| **Database-scoped isolation** | Separate MongoDB databases per tenant. Not row-level filtering on a shared DB. | Application-level filtering is what the broken current system does. You're building the replacement. |
+| **Explainability** | If you use a library for a core requirement, explain how it works in your architecture doc. | If you can't explain it, you didn't build it. |
 | Max concurrent MongoDB connections | 10 total | Forces real connection management, not "new connection per request" |
 | Migration time | < 60 seconds for seed data | Forces efficient batch processing |
 | Timeline | **3 days** from receipt | |
 | Language | Node.js / TypeScript | |
 | Database | MongoDB | |
 | Queue | BullMQ (Redis-backed) | For background job processing |
+
+**See [CONSTRAINTS.md](CONSTRAINTS.md) for detailed rules on what's allowed and what's not.**
 
 ---
 

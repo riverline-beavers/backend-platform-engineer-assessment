@@ -39,6 +39,12 @@ A take-home assessment for the Backend Engineer — Platform & Security role. Yo
 - **Timeline:** 3 days from receipt
 - **Stack:** Node.js / TypeScript / MongoDB / BullMQ (Redis)
 - **Setup:** `docker compose up` must bring up your entire system. No manual steps.
+- **All infrastructure runs locally.** No Firebase, Supabase, managed databases, or cloud services.
+- **No pre-built auth/RBAC frameworks.** No casbin, accesscontrol, passport strategies, Auth0, Clerk. You build it. Crypto primitives (jsonwebtoken, bcrypt) are fine.
+- **Tenant isolation must be database-scoped.** Separate databases per tenant — not row-level filtering on a shared DB.
+- **Explainability.** If you can't explain how something in your system works, don't use it.
+
+**Read [CONSTRAINTS.md](CONSTRAINTS.md) for the full rules on what's allowed and what's not.**
 
 ## Deliverables
 
